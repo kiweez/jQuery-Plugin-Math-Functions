@@ -67,15 +67,18 @@
 		params 			= $.extend( {items:"div"}, params);
 		var sum			= 0;
 		var result 		= [];
+		var tmpVal		= null;
 		this.each(function() {
 			$(this).find(params.items).each(function() {
-				if($(this).val()!="" && $.isNumeric($(this).val().replace(/ /ig, ""))){
-					sum+=parseFloat($(this).val().replace(/ /ig, ""));
-				}else if($(this).text()!="" && $.isNumeric($(this).text().replace(/ /ig, ""))){
-					sum+=parseFloat($(this).text().replace(/ /ig, ""));
+				if($(this).is('input')){
+					tmpVal = $(this).val().replace(/ /ig, "")
 				}
+				else{
+					tmpVal = $(this).text().replace(/ /ig, "")
+				}
+				sum += parseFloat(tmpVal);
 			})
-			result.push(sum==0?false:sum);
+			result.push(sum == 0 ? false : sum);
 		})
 		return result;
 	}
