@@ -63,4 +63,21 @@
 		}
 		return test;
 	}
+	$.fn.sum = function(params) {
+		params 			= $.extend( {items:"div"}, params);
+		var sum			= 0;
+		var result 		= [];
+		this.each(function() {
+			$(this).find(params.items).each(function() {
+				if($(this).val()!="" && $.isNumeric($(this).val().replace(/ /ig, ""))){
+					sum+=parseFloat($(this).val().replace(/ /ig, ""));
+				}else if($(this).text()!="" && $.isNumeric($(this).text().replace(/ /ig, ""))){
+					sum+=parseFloat($(this).text().replace(/ /ig, ""));
+				}
+			})
+			result.push(sum==0?false:sum);
+		})
+		return result;
+	}
+	
 })(jQuery);
